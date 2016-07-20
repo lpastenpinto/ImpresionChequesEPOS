@@ -133,13 +133,14 @@ namespace Aplicacion_Impresora_Cheques.Model
             this.posPrinter.RotatePrint(PrinterStation.Slip, PrintRotation.Right90);
             string stringAImprimir = "\u001b|rA                                                   " + Convert.ToInt64(monto).ToString("N0") + ".-";
             stringAImprimir = stringAImprimir.PadRight(67, '*');
-            this.posPrinter.PrintNormal(PrinterStation.Slip, " \n");
+            //this.posPrinter.PrintNormal(PrinterStation.Slip, " \n");
             this.posPrinter.PrintNormal(PrinterStation.Slip, stringAImprimir + "\n");
+            this.posPrinter.PrintNormal(PrinterStation.Slip, " \n");
             this.posPrinter.PrintNormal(PrinterStation.Slip, " \n");
             this.posPrinter.PrintNormal(PrinterStation.Slip, " \n"); //se agrega otro salto de linea 
             stringAImprimir = string.Concat(new object[]
 			{
-				"\u001b|rA                                        ",
+				"\u001b|rA                                            ",
 				fechaVencimiento.Day,
 				"   ",
 				TextHelper.MesEnPalabras(fechaVencimiento.Month),
@@ -215,7 +216,7 @@ namespace Aplicacion_Impresora_Cheques.Model
 			});
             
             this.posPrinter.PrintNormal(PrinterStation.Slip, stringAImprimir + "\n");
-            this.posPrinter.PrintNormal(PrinterStation.Slip, stringAImprimir + "\n");
+            this.posPrinter.PrintNormal(PrinterStation.Slip, "\n");
             this.posPrinter.PrintNormal(PrinterStation.Slip, "\u001b|5uF");
             stringAImprimir = "\u001b|rA          \u001b|1C " + PagueseANombreDe + ".-";
             stringAImprimir = stringAImprimir.PadRight(67, '*');
