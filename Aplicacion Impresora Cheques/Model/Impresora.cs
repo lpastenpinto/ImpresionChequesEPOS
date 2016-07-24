@@ -180,20 +180,34 @@ namespace Aplicacion_Impresora_Cheques.Model
             this.posPrinter.RotatePrint(PrinterStation.Slip, PrintRotation.Right90);
             this.posPrinter.PrintNormal(PrinterStation.Slip, " \n");
             this.posPrinter.PrintNormal(PrinterStation.Slip, " \n");            
+            
            
             string montoString = monto.ToString();
 
             string stringAImprimir = "\u001b|rA                                              ";
-
+            
             for (int z = 0; z < montoString.Length; ++z)
             {
-                stringAImprimir = stringAImprimir +montoString[z]+ " ";               
+                string espacio = "";
+                if (z >= 9)
+                {
+                    espacio = " ";
+                }
+                else {
+                    if ((z % 2) == 0)
+                    {
+                        espacio = " ";
+                    }
+                    else {
+                        espacio = "  ";
+                    }
+                
+                }
+                stringAImprimir = stringAImprimir +montoString[z]+ espacio;               
             }
-            stringAImprimir = stringAImprimir + ".-";            
-            stringAImprimir = stringAImprimir.PadRight(67, '*');
+
             this.posPrinter.PrintNormal(PrinterStation.Slip, stringAImprimir + "\n");            
-            this.posPrinter.PrintNormal(PrinterStation.Slip, " \n");
-            
+            this.posPrinter.PrintNormal(PrinterStation.Slip, " \n");            
             
             string dayFechaVenc = helpText.getDayDateTimeToString(fechaVencimiento);
             string monthFechaVenc = helpText.getMonthDateTimeToString(fechaVencimiento);
@@ -201,11 +215,11 @@ namespace Aplicacion_Impresora_Cheques.Model
 
             stringAImprimir = string.Concat(new object[]
 			{
-				"\u001b|rA                                                    ",
+				"\u001b|rA                                                   ",
 				dayFechaVenc[0],
                 " ",
                 dayFechaVenc[1],
-				"  ",
+				"   ",
 				monthFechaVenc[0],
                 " ",
                 monthFechaVenc[1],

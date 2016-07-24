@@ -438,6 +438,7 @@
             this.buttonTest.TabIndex = 11;
             this.buttonTest.Text = "Abrir Test";
             this.buttonTest.UseVisualStyleBackColor = true;
+            this.buttonTest.Visible = false;
             this.buttonTest.Click += new System.EventHandler(this.buttonTest_Click);
             // 
             // Main_Form
