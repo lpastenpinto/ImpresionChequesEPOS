@@ -285,7 +285,7 @@ namespace Aplicacion_Impresora_Cheques
                     error = "Debe llenar todos los campos";
                     return false;                    
                 }
-                if (cheque.CodAutorizacion == "" || cheque.PagueseANombreDe == "" || cheque.Rut == "" || cheque.NroSerieCI == "" || cheque.NroBoleta == "" || cheque.Sucursal == "") {
+                if (cheque.CodAutorizacion == "" || cheque.PagueseANombreDe == "" || cheque.Rut == "" || cheque.NroBoleta == "" || cheque.Sucursal == "") {
                     error = "Debe llenar todos los campos";                   
                     return false;                    
                 }

@@ -98,7 +98,7 @@ namespace Aplicacion_Impresora_Cheques.Model
             bool result;
             try
             {
-                this.posPrinter.BeginInsertion(500);
+                this.posPrinter.BeginInsertion(10000);
                 this.posPrinter.EndInsertion();
             }
             catch (Exception e_22)
@@ -115,7 +115,7 @@ namespace Aplicacion_Impresora_Cheques.Model
             bool result;
             try
             {
-                this.posPrinter.BeginRemoval(5000);
+                this.posPrinter.BeginRemoval(10000);
                 this.posPrinter.EndRemoval();
             }
             catch (Exception e_22)
@@ -131,16 +131,16 @@ namespace Aplicacion_Impresora_Cheques.Model
         {
             this.posPrinter.TransactionPrint(PrinterStation.Slip, PrinterTransactionControl.Transaction);
             this.posPrinter.RotatePrint(PrinterStation.Slip, PrintRotation.Right90);
-            string stringAImprimir = "\u001b|rA                                                   " + Convert.ToInt64(monto).ToString("N0") + ".-";
+            string stringAImprimir = "\u001b|rA                                                    " + Convert.ToInt64(monto).ToString("N0") + ".-";
             stringAImprimir = stringAImprimir.PadRight(67, '*');
             //this.posPrinter.PrintNormal(PrinterStation.Slip, " \n");
             this.posPrinter.PrintNormal(PrinterStation.Slip, stringAImprimir + "\n");
             this.posPrinter.PrintNormal(PrinterStation.Slip, " \n");
             this.posPrinter.PrintNormal(PrinterStation.Slip, " \n");
-            this.posPrinter.PrintNormal(PrinterStation.Slip, " \n"); //se agrega otro salto de linea 
+            //this.posPrinter.PrintNormal(PrinterStation.Slip, " \n"); //se agrega otro salto de linea 
             stringAImprimir = string.Concat(new object[]
 			{
-				"\u001b|rA                                            ",
+				"\u001b|rA                                           ",
 				fechaVencimiento.Day,
 				"   ",
 				TextHelper.MesEnPalabras(fechaVencimiento.Month),
@@ -178,15 +178,15 @@ namespace Aplicacion_Impresora_Cheques.Model
         {
             this.posPrinter.TransactionPrint(PrinterStation.Slip, PrinterTransactionControl.Transaction);
             this.posPrinter.RotatePrint(PrinterStation.Slip, PrintRotation.Right90);
-            this.posPrinter.PrintNormal(PrinterStation.Slip, " \n");
+            //this.posPrinter.PrintNormal(PrinterStation.Slip, " \n");
             this.posPrinter.PrintNormal(PrinterStation.Slip, " \n");            
             
            
             string montoString = monto.ToString();
 
-            string stringAImprimir = "\u001b|rA                                              ";
+            string stringAImprimir = "\u001b|rA                                              " + montoString;
             
-            for (int z = 0; z < montoString.Length; ++z)
+            /*for (int z = 0; z < montoString.Length; ++z)
             {
                 string espacio = "";
                 if (z >= 9)
@@ -205,7 +205,7 @@ namespace Aplicacion_Impresora_Cheques.Model
                 }
                 stringAImprimir = stringAImprimir +montoString[z]+ espacio;               
             }
-
+            */
             this.posPrinter.PrintNormal(PrinterStation.Slip, stringAImprimir + "\n");            
             this.posPrinter.PrintNormal(PrinterStation.Slip, " \n");            
             
@@ -223,7 +223,7 @@ namespace Aplicacion_Impresora_Cheques.Model
 				monthFechaVenc[0],
                 " ",
                 monthFechaVenc[1],
-				"       ",
+				"      ",
 				yearFechaVenc[0],
                 " ",
                 yearFechaVenc[1]
@@ -303,13 +303,22 @@ namespace Aplicacion_Impresora_Cheques.Model
 
         public void ImprimirEndoso(string rut, string nroSerieCI, string telefono, string boleta, string codAutorizacion, string sucursal)
         {
-            this.posPrinter.TransactionPrint(PrinterStation.Slip, PrinterTransactionControl.Transaction);
+            
+            this.posPrinter.TransactionPrint(PrinterStation.Slip, PrinterTransactionControl.Transaction);            
+            this.posPrinter.RotatePrint(PrinterStation.Slip, PrintRotation.Rotate180);           
             this.posPrinter.ChangePrintSide(PrinterSide.Opposite);
+            for (int l = 0; l < 5; l++) {
+                this.posPrinter.PrintNormal(PrinterStation.Slip, " \u001b|cA\n");
+                this.posPrinter.PrintNormal(PrinterStation.Slip, " \u001b|cA\n");
+                this.posPrinter.PrintNormal(PrinterStation.Slip, " \u001b|cA\n");
+                this.posPrinter.PrintNormal(PrinterStation.Slip, " \u001b|cA\n");
+                this.posPrinter.PrintNormal(PrinterStation.Slip, " \u001b|cA\n");
+            }
+            /*this.posPrinter.PrintNormal(PrinterStation.Slip, " \u001b|cA\n");
             this.posPrinter.PrintNormal(PrinterStation.Slip, " \u001b|cA\n");
             this.posPrinter.PrintNormal(PrinterStation.Slip, " \u001b|cA\n");
             this.posPrinter.PrintNormal(PrinterStation.Slip, " \u001b|cA\n");
-            this.posPrinter.PrintNormal(PrinterStation.Slip, " \u001b|cA\n");
-            this.posPrinter.PrintNormal(PrinterStation.Slip, " \u001b|cA\n");
+            this.posPrinter.PrintNormal(PrinterStation.Slip, " \u001b|cA\n");*/
             this.posPrinter.PrintNormal(PrinterStation.Slip, " \u001b|cA _____________________________________\n");
             this.posPrinter.PrintNormal(PrinterStation.Slip, " \u001b|cA|                                     |\n");
             this.posPrinter.PrintNormal(PrinterStation.Slip, " \u001b|cA|                                     |\n");
