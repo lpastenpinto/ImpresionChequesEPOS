@@ -169,22 +169,24 @@ namespace Aplicacion_Impresora_Cheques.Model
                 stringAImprimir = stringAImprimir.PadRight(25, '*');
                 this.posPrinter.PrintNormal(PrinterStation.Slip, stringAImprimir + "\n");
             }
-            this.posPrinter.RotatePrint(PrinterStation.Slip, PrintRotation.Right90);
+            //this.posPrinter.RotatePrint(PrinterStation.Slip, PrintRotation.Right90);
+            
             this.posPrinter.TransactionPrint(PrinterStation.Slip, PrinterTransactionControl.Normal);
             this.posPrinter.RotatePrint(PrinterStation.Slip, PrintRotation.Normal);
+            //this.posPrinter.ClearOutput();
         }
 
         public void ImprimirChequeFormatoNuevo(string monto, DateTime fechaVencimiento, string PagueseANombreDe)
         {
             this.posPrinter.TransactionPrint(PrinterStation.Slip, PrinterTransactionControl.Transaction);
+            
             this.posPrinter.RotatePrint(PrinterStation.Slip, PrintRotation.Right90);
             //this.posPrinter.PrintNormal(PrinterStation.Slip, " \n");
-            this.posPrinter.PrintNormal(PrinterStation.Slip, " \n");            
-            
-           
-            string montoString = monto.ToString();
+            this.posPrinter.PrintNormal(PrinterStation.Slip, " \n");
 
-            string stringAImprimir = "\u001b|rA                                              " + montoString;
+            //string montoString = helpText.valoresPesos(monto.ToString());
+
+            string stringAImprimir = "\u001b|rA                                              " + Convert.ToInt64(monto).ToString("N0") + ".-";
             
             /*for (int z = 0; z < montoString.Length; ++z)
             {
@@ -223,10 +225,10 @@ namespace Aplicacion_Impresora_Cheques.Model
 				monthFechaVenc[0],
                 " ",
                 monthFechaVenc[1],
-				"      ",
-				yearFechaVenc[0],
-                " ",
-                yearFechaVenc[1]
+				" 20"+yearFechaVenc[0]+yearFechaVenc[1]//
+				//yearFechaVenc[0]+yearFechaVenc[1]+yearFechaVenc[2]+"6",
+                //" ",
+                //yearFechaVenc[1]
 			});
             
             this.posPrinter.PrintNormal(PrinterStation.Slip, stringAImprimir + "\n");
@@ -252,9 +254,10 @@ namespace Aplicacion_Impresora_Cheques.Model
                 stringAImprimir = stringAImprimir.PadRight(25, '*');
                 this.posPrinter.PrintNormal(PrinterStation.Slip, stringAImprimir + "\n");
             }
-            this.posPrinter.RotatePrint(PrinterStation.Slip, PrintRotation.Right90);
+            //this.posPrinter.RotatePrint(PrinterStation.Slip, PrintRotation.Right90);
             this.posPrinter.TransactionPrint(PrinterStation.Slip, PrinterTransactionControl.Normal);
             this.posPrinter.RotatePrint(PrinterStation.Slip, PrintRotation.Normal);
+            //this.posPrinter.ClearOutput();
         }
 
         public void ImprimirChequeConCaracteres(string monto, DateTime fechaVencimiento, string PagueseANombreDe)

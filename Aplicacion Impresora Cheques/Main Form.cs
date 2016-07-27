@@ -23,6 +23,7 @@ namespace Aplicacion_Impresora_Cheques
             this.textBoxSucursal.Text = "LARRONDO";
             this.comboBoxFormatoCheque.SelectedIndex = 0;
             this.impresoraEpson = new Impresora();
+            
                         
         }
 
