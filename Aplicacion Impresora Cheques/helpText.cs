@@ -194,5 +194,91 @@ namespace Aplicacion_Impresora_Cheques
 
             return retorno;
         }
+
+
+        public static string reverseString(string s)
+        {
+            char[] arr = s.ToCharArray();
+            Array.Reverse(arr);
+            return new string(arr);
+        }
+
+
+        public static string separateMonto(string montoString)
+        {            
+            string retorno = "";
+            if (montoString.Length == 6)
+            {
+                for (int z = 0; z < montoString.Length; ++z) {
+                    string espacio = " ";
+                    if (z == (montoString.Length - 1))
+                    {
+                        espacio = "";
+                    }
+                    else if(z==2){
+                        espacio = "  ";
+                    }
+                    retorno = retorno + montoString[z] + espacio;
+                }
+            }
+            else
+            {
+                for (int z = 0; z < montoString.Length; ++z)
+                {
+                    string espacio = "";
+                    if (z == (montoString.Length - 1))
+                    {
+                        espacio = "";
+                    }
+                    else if (z >= 9)
+                    {
+                        espacio = " ";
+                    }
+                    else if (z == 3)
+                    {
+                        espacio = " ";
+                    }
+                    else if (z == 5)
+                    {
+                        espacio = " ";
+                    }
+                    else
+                    {
+                        if ((z % 2) == 0)
+                        {
+                            espacio = " ";
+                        }
+                        else
+                        {
+                            espacio = "  ";
+                        }
+
+                    }
+                    retorno = retorno + montoString[z] + espacio;
+                }
+            }
+            string astericos = "***";
+
+            /* if (montoString.Length > 6)
+            {
+                astericos = "**";
+            }
+            */
+
+            if (montoString.Length > 6)
+            {
+                astericos = "*";
+            }
+            else if (montoString.Length > 5)
+            {
+                astericos = "**";
+            }
+            
+            
+            retorno = retorno + astericos;    
+             
+            return retorno;
+        
+        }        
     }
 }

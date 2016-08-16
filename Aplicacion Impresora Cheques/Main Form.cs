@@ -23,6 +23,9 @@ namespace Aplicacion_Impresora_Cheques
             this.textBoxSucursal.Text = "LARRONDO";
             this.comboBoxFormatoCheque.SelectedIndex = 0;
             this.impresoraEpson = new Impresora();
+
+
+
             
                         
         }
@@ -330,13 +333,16 @@ namespace Aplicacion_Impresora_Cheques
                                 loadingImpresionForm loading = new loadingImpresionForm();
                                 loading.Show();                                
                                 Application.DoEvents();
-                                this.impresoraEpson.ImprimirEndoso(cheque.Rut, cheque.NroSerieCI, cheque.Telefono, cheque.NroBoleta, cheque.CodAutorizacion, cheque.Sucursal);
+                                
                                 
                                 if (formatoCheque == "NUEVO")
                                 {                                       
-                                    this.impresoraEpson.ImprimirChequeFormatoNuevo(cheque.MontoCheque.ToString(), cheque.FechaVencimiento, cheque.PagueseANombreDe);    
+                                     this.impresoraEpson.ImprimirEndosoFormatoNuevo(cheque.Rut, cheque.NroSerieCI, cheque.Telefono, cheque.NroBoleta, cheque.CodAutorizacion, cheque.Sucursal);
+                                     this.impresoraEpson.ImprimirChequeFormatoNuevo(cheque.MontoCheque.ToString(), cheque.FechaVencimiento, cheque.PagueseANombreDe);
+                                   
                                 }
                                 else {
+                                    this.impresoraEpson.ImprimirEndoso(cheque.Rut, cheque.NroSerieCI, cheque.Telefono, cheque.NroBoleta, cheque.CodAutorizacion, cheque.Sucursal);
                                     this.impresoraEpson.ImprimirCheque(cheque.MontoCheque.ToString(), cheque.FechaVencimiento, cheque.PagueseANombreDe);
                                 }
                                 loading.Close();                               
