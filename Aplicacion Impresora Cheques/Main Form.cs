@@ -395,6 +395,18 @@ namespace Aplicacion_Impresora_Cheques
             Form1 test = new Form1();
             test.Show();
             
-        }        
+        }
+       
+
+        private void dateTimePickerFechaVencimiento_ValueChanged(object sender, EventArgs e)
+        {
+            DateTime fechaVencimientoChequeTemp = this.dateTimePickerFechaVencimiento.Value.Date;
+            int resultComparation = DateTime.Compare(fechaVencimientoChequeTemp, DateTime.Today);
+            if (resultComparation < 0) {
+                this.dateTimePickerFechaVencimiento.Value = DateTime.Today;
+                MessageBox.Show("Imposible ingresar una fecha menor a la actual. Usted ingreso: " + fechaVencimientoChequeTemp.ToShortDateString()+" y la fecha actual es:"+DateTime.Today.ToShortDateString());
+            }
+            
+        }
     }
 }

@@ -118,6 +118,7 @@
             this.dateTimePickerFechaVencimiento.Name = "dateTimePickerFechaVencimiento";
             this.dateTimePickerFechaVencimiento.Size = new System.Drawing.Size(174, 20);
             this.dateTimePickerFechaVencimiento.TabIndex = 7;
+            this.dateTimePickerFechaVencimiento.ValueChanged += new System.EventHandler(this.dateTimePickerFechaVencimiento_ValueChanged);
             // 
             // textBoxPagueseNombre
             // 
